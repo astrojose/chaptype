@@ -6,9 +6,7 @@ import TypingGame from './pages/TypingGame'
 function App() {
   return (
       <Layout>
-
         <TypingGame />
-
       </Layout>
   )
 }

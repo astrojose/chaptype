@@ -194,7 +194,7 @@ a {
 /*# sourceMappingURL=App.css.map */
 
 .curr {
-  background-color: blueviolet;
+  background-color: rgb(153, 79, 221);
   color:white;
   border-radius: 2px;
 }
@@ -204,5 +204,5 @@ a {
 }
 
 .wrong{
-  color: red;
+  color: rgb(241, 76, 76);
 }
