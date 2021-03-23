@@ -1,0 +1,208 @@
+*, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.root {
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.App .top-nav {
+  background-color: lightsteelblue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.App .top-nav .logo {
+  padding: 24px;
+}
+
+.App .top-nav .logo a {
+  font-size: 2em;
+  font-weight: 500;
+}
+
+.App .top-nav .nav {
+  margin: 24px 24px;
+}
+
+.App .top-nav .nav ul li {
+  margin: 0 20px;
+  display: inline-block;
+  list-style: none;
+}
+
+.App .top-nav .nav ul li a {
+  font-size: 1.5em;
+}
+
+.App content {
+  height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  background-color: #85d885;
+}
+
+.App content .welcome p {
+  padding: 5px 10px;
+}
+
+.App content .cta {
+  margin: 25px 0px;
+}
+
+.App content .cta button {
+  padding: 10px 4px;
+  background-color: yellowgreen;
+  font-size: 1.5em;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.App .stick-bottom {
+  display: absolute;
+  bottom: 0;
+}
+
+.App footer {
+  background-color: lightsteelblue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100px;
+}
+
+.App footer .links ul {
+  padding: 10px 10px;
+}
+
+.App footer .links ul li {
+  margin: 0 10px;
+  display: inline-block;
+  list-style: none;
+}
+
+.App footer .copyright p {
+  padding: 10px;
+}
+
+.typing {
+  border: solid 2px grey;
+  border-radius: 10px;
+  width: 720px;
+  height: 280px;
+}
+
+.typing .quote {
+  border-bottom: solid 2px grey;
+  margin-bottom: 10px;
+  background-color: linen;
+  border-radius: inherit;
+  height: 142px;
+}
+
+.typing .quote p {
+  font-size: 1.2em;
+  padding: 5px;
+}
+
+.typing .quote p span.now {
+  background-color: #c9c7c7;
+}
+
+.typing .current {
+  margin-top: 20px;
+}
+
+.typing .current .input {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 20px;
+}
+
+.typing .current .input input {
+  background-color: lightgoldenrodyellow;
+  font-size: 1.5em;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+
+.typing .current .input .actions button {
+  cursor: pointer;
+  color: #fff;
+  background-color: lightsteelblue;
+  font-size: 1.5em;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+
+.status {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.status .timer p {
+  font-size: 3em;
+  font-family: monospace;
+}
+/*# sourceMappingURL=App.css.map */
+
+.curr {
+  background-color: blueviolet;
+  color:white;
+  border-radius: 2px;
+}
+
+.done {
+  color: rgb(173, 172, 172)
+}
+
+.wrong{
+  color: red;
+}
