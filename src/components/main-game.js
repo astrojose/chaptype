@@ -3,7 +3,7 @@ import React from 'react'
 import Quote from './quote.js'
 
 
-const MainGame = () => {
+const MainGame = (props) => {
     let [windex, setWindex] = React.useState(0)
     let [errors,setErrors]= React.useState([])
     let [start, setStart]=React.useState()
@@ -25,29 +25,7 @@ const MainGame = () => {
     //     }
     // },[errors]) 
 
-    let quotesArr = [
-      "Msafara wa mamba haukosi burukenge, Ukichengwa tulia, Kuongeza uzani kama nakudai ni madharau",
-    //   "Kazi ya moyo ni kusukuma damu, kupenda ni kiherehere",
-    //   "Salimia watu, pesa huisha",
-    //   "Pambana na hali yako",
-    //   "Hata uwe na imani kali vipi, huwezi kusali wakati unafanya mapenzi",
-    //   "Mwanaume hata awe bahili vipi, hawezi kumpa mwanamke mimba nusu",
-    //   "Akishindwa sultani, raia huweza nini?",
-    //   "Aliyetota, hajui kutota",
-    //   "Baniani mbaya kiatu chake dawa",
-    //   "Bure ni malio, pasipo na sikio",
-    //   "Cha mlevi huliwa na mgema",
-    //   "Aigae tembo kunya hupasuka msamba",
-    //   "Hata uwe kauzu vipi, huwezi kujamba wakati unatongoza",
-    //   "Mke wa mtu sumu, mume wa mtu maziwa",
-    //   "Silaha ni pesa, bunduki ni mizigo tu",
-    //   "Kipara bila pesa   ni kovu",
-    //   "Ukipenda wasichana wa shule nunulia mkeo sare",
-    //   "Nyani haoni kundule",
-    //   "Maskini akipata matako hulia mbwata",
-    //   "Mficha uchi hazai",
-    //   "Ukinidiliti mwenzako atanidanlodi"
-    ]
+    
 
     let getWpm = () => {
         let words = windex + 1
@@ -58,8 +36,7 @@ const MainGame = () => {
 
     let getErrors = () => {return [...new Set(errors)].length}
 
-    // let parag = quotesArr[(Math.random()*quotesArr.length)|0];
-    let parag = quotesArr[0];
+    let parag = props.quote.toLowerCase();
 
     let handleInput = (e) => {
         let arrQuote = parag.split(" ")
