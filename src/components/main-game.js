@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, Redirect } from 'react-router-dom'
 
 import Quote from './quote.js'
 
@@ -25,21 +26,34 @@ const MainGame = (props) => {
     //     }
     // },[errors]) 
 
-    
+    let parag = props.quote.toLowerCase();
 
-    let getWpm = () => {
+    const splitQuote = () => { return  parag.split(" ")}
+
+    const getWpm = () => {
         let words = windex + 1
         let durr = (end - start)/1000/60
-        let errWords = [...new Set(errors)].length
         return ((words)/durr).toFixed()
     }
 
-    let getErrors = () => {return [...new Set(errors)].length}
+    const getAccuracy = () => {
+        let errors = getErrorsNo()
+        let words = splitQuote().length
+        return (words-errors)/words * 100
+    }
 
-    let parag = props.quote.toLowerCase();
+    const getErrWords = () => {
+        let errors = getErrors()
+        return console.log(errors)
+        // return errors.forEach((index)=>{(splitQuote()[index])})
+    }
 
-    let handleInput = (e) => {
-        let arrQuote = parag.split(" ")
+    const getErrors = () => {return [...new Set(errors)]}
+
+    const getErrorsNo = () => {return getErrors().length}
+
+    const handleInput = (e) => {
+        let arrQuote = splitQuote()
           // if (windex == 0 && e.target.value != '') {
 
         // }
@@ -114,11 +128,16 @@ const MainGame = (props) => {
         let result = (
         <div className="welcome">
          <p>Speed: {getWpm()} wpm</p>
-
-         <p> Errors : {getErrors()} words</p>
+         <p> Acccuracy : {getAccuracy()}%</p>
+         <p> Errors : {getErrorsNo()} words</p>
+         <p> {getErrWords()} </p>
             <p>Above is your score</p>
             <div className="cta">
                 <button onClick={()=>{window.location.reload()}}>play again</button>
+                {/* <button onClick={
+                    ()=>{
+                        <Link to={{ pathname: '/', state: { quote: getErrors() } }}/>}}
+                >clear errors</button> */}
             </div>
         </div>
         )
