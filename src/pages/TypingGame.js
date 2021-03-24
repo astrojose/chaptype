@@ -37,7 +37,7 @@ const TypingGame = () => {
   return (
       <div>
         <Router>
-            {/* <Route path="/" component={MainGame} /> */}
+              {/* <Route path="/" component={MainGame} /> */}
             <Route
               path='/'
               render={(props) => (
