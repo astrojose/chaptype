@@ -39,7 +39,11 @@ const MainGame = (props) => {
     const getAccuracy = () => {
         let errors = getErrorsNo()
         let words = splitQuote().length
+<<<<<<< HEAD
         return ((words-errors)/words * 100).toFixed()
+=======
+        return (words-errors)/words * 100
+>>>>>>> 484af21d094309cc4179f3c35d6d6afd6a21ac58
     }
 
     const getErrWords = () => {
@@ -133,9 +137,17 @@ const MainGame = (props) => {
          <p> {getErrWords()} </p>
             <p>Above is your score</p>
             <div className="cta">
+<<<<<<< HEAD
                 <button onClick={
                     ()=>{window.location.reload()}}
                     >play again</button>
+=======
+                <button onClick={()=>{window.location.reload()}}>play again</button>
+                {/* <button onClick={
+                    ()=>{
+                        <Link to={{ pathname: '/', state: { quote: getErrors() } }}/>}}
+                >clear errors</button> */}
+>>>>>>> 484af21d094309cc4179f3c35d6d6afd6a21ac58
             </div>
         </div>
         )
