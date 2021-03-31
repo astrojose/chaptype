@@ -8,7 +8,12 @@ const Welcome = () => {
                <p>Master your typing abilities with diverse typing games. Get started</p>
             </div>
             <div className="cta">
-                <button onClick={()=>{window.location = '/'}}>Start typing</button>
+                <button onClick={
+                  ()=>{
+                    window.location = '/'
+                  }
+                }>Start typing
+                </button>
             </div>
         </content>
     )

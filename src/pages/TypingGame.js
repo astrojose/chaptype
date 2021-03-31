@@ -7,7 +7,7 @@ import Welcome from '../components/welcome.js';
 const TypingGame = () => {
 
   let quotesArr = [
-    "Msafara wa mamba haukosi burukenge", "Ukichengwa tulia", 
+    "Msafara wa mamba haukosi burukenge", "Ukichengwa tulia",
     "Kuongeza uzani kama nakudai ni madharau",
     "Kazi ya moyo ni kusukuma damu, kupenda ni kiherehere",
     "Salimia watu, pesa huisha",
@@ -33,12 +33,13 @@ const TypingGame = () => {
 
   let randQuote = quotesArr[(Math.random()*quotesArr.length)|0];
 
+  // let phrase = "Wahusika hao, ambao kwa kawaida ni mmoja au wawili hujitokeza kutoka mwanzo hadi mwisho wa hadithi. Mara kwa mara wahusika hawa"
 
   return (
       <div>
         <Router>
               {/* <Route path="/" component={MainGame} /> */}
-            <Route
+            <Route  
               path='/'
               render={(props) => (
                 <MainGame {...props} quote={randQuote} />

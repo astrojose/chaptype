@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 
+import quoteData from '../data.json'
 import Quote from './quote.js'
 
 
@@ -19,12 +20,12 @@ const MainGame = (props) => {
     },[windex]);
 
     // React.useEffect(()=>{
-    //     let wordNodes = document.querySelector(".quoteText").childNodes 
+    //     let wordNodes = document.querySelector(".quoteText").childNodes
     //     if (errors.length && errors) {
     //         let lastErrWord = errors[errors.length - 1]
     //         let node = wordNodes[lastErrWord].classList.add('wrong')
     //     }
-    // },[errors]) 
+    // },[errors])
 
     let parag = props.quote.toLowerCase();
 
@@ -59,18 +60,13 @@ const MainGame = (props) => {
 
         // }
         if (e.target.value.length == 1 && windex == 0) {
-            console.log("SHIT STARTED")
             let time1 = new Date()
             setStart(time1.getTime())
         }
         if(!(e.target.value).endsWith(' ')){
-            console.log(windex)
-            console.log(arrQuote[windex])
-
             if(arrQuote[windex].startsWith((e.target.value).trim()))
             {
-                console.log(e.target.value)
-                console.log("is valid")
+                return
             }
             else {
                 console.log("shit is wrong")
@@ -84,16 +80,24 @@ const MainGame = (props) => {
         //     }
 
         else {
-            console.log("the space is here")
+
             // [...new Set(array)]; --> skip dupes
-            e.target.value = ''
             let wordNodes = document.querySelector(".quoteText").childNodes
-            wordNodes.item(windex).className="done"
+            let word = wordNodes.item(windex)
+            word.className="done"
 
             if (errors.length && errors.includes(windex)) {
-                let node = wordNodes[windex].classList.add('wrong')
+                if(e.target.value == word.innerText)
+                {
+                    let node = wordNodes[windex].classList.add('cor')
+                } else {
+                    let node = wordNodes[windex].classList.add('wrong')
+                }
+                console.log('original',word.innerText)
+                console.log('error word',e.target.value)
             }
-            
+            e.target.value = ''
+
             if (windex < arrQuote.length-1) {
                 console.log(windex)
                 console.log(arrQuote.length)
@@ -112,31 +116,42 @@ const MainGame = (props) => {
                 <Quote data={parag} wordInd={windex}/>
                 <div className="current">
                     <div className="input">
-                        <input name="typed"
-                            placeholder="Type the above text here ..."
-                            autoFocus
-                            onInput={ handleInput }
-                            />
-                        <div className="actions">
-                            <button onClick={()=>{window.location.reload()}}>Restart</button>
-                        </div>
+                        <input
+                          name="typed"
+                          autoFocus
+                          placeholder="type here ..."
+                          onInput={ handleInput }
+                        />
                     </div>
-                    <div className="status"> </div>
+                    <div className="actions">
+                        <button
+                          onClick={
+                            ()=>{
+                              window.location.reload()
+                            }
+                          }> restart
+                        </button>
+                    </div>
                 </div>
             </div>
         )
 
         let result = (
-        <div className="welcome">
-         <p>Speed: {getWpm()} wpm</p>
-         <p> Acccuracy : {getAccuracy()}%</p>
-         <p> Errors : {getErrorsNo()} words</p>
-         <p> {getErrWords()} </p>
-            <p>Above is your score</p>
+        <div className="result">
+          <div className="result-head">
+            <h1>result</h1>
+          </div>
+          <div className="result-body">
+
+          </div>
+         <span>Speed: {getWpm()} WPM</span>
+         <span> Acccuracy : {getAccuracy()}%</span>
+         <span> Errors : {getErrorsNo()} Words</span>
             <div className="cta">
                 <button onClick={
                     ()=>{window.location.reload()}}
-                    >play again</button>
+                    > restart [ctrl+r]
+                </button>
             </div>
         </div>
         )
