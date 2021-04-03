@@ -92,6 +92,7 @@ const MainGame = (props) => {
                 if(e.target.value == word.innerText)
                 {
                     let node = wordNodes[windex].classList.add('cor')
+                    errors.pop(windex)
                 } else {
                     let node = wordNodes[windex].classList.add('wrong')
                 }
