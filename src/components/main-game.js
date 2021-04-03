@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
+import swahili from 'swahili'
 
 import quoteData from '../data.json'
 import Quote from './quote.js'
@@ -55,7 +56,8 @@ const MainGame = (props) => {
     const getErrorsNo = () => {return getErrors().length}
 
     const handleInput = (e) => {
-        let arrQuote = splitQuote()
+        let arrQuote = splitQuote() 
+        
           // if (windex == 0 && e.target.value != '') {
 
         // }
@@ -93,16 +95,16 @@ const MainGame = (props) => {
                 } else {
                     let node = wordNodes[windex].classList.add('wrong')
                 }
-                console.log('original',word.innerText)
-                console.log('error word',e.target.value)
             }
-            e.target.value = ''
 
-            if (windex < arrQuote.length-1) {
+            if (windex < arrQuote.length-1 && e.target.value != ' ') {
                 console.log(windex)
                 console.log(arrQuote.length)
                 setWindex(windex+1)
             }
+
+            e.target.value = ''
+
 
             if (windex == arrQuote.length-1) {
                 let time2 = new Date()

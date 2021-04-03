@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
+import swahili from 'swahili';
 
 import MainGame from '../components/main-game.js'
 import Welcome from '../components/welcome.js';
@@ -30,9 +31,13 @@ const TypingGame = () => {
     "Mficha uchi hazai",
     "Ukinidiliti mwenzako atanidanlodi"
   ]
+  const sw = new swahili(16);
+  sw.paragraph()
 
-  let randQuote = quotesArr[(Math.random()*quotesArr.length)|0];
-
+  // let randQuote = quotesArr[(Math.random()*quotesArr.length)|0];
+  let randQuote = sw.paragraph().trim()
+  
+  
   // let phrase = "Wahusika hao, ambao kwa kawaida ni mmoja au wawili hujitokeza kutoka mwanzo hadi mwisho wa hadithi. Mara kwa mara wahusika hawa"
 
   return (
