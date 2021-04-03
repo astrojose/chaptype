@@ -1,9 +1,8 @@
 import React from 'react'
-import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router } from "react-router-dom";
 import swahili from '../random';
 
 import MainGame from '../components/main-game.js'
-import Welcome from '../components/welcome.js';
 
 const TypingGame = () => {
   const sw = new swahili(16);

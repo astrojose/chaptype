@@ -1,8 +1,5 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
-import swahili from 'swahili'
 
-import quoteData from '../data.json'
 import Quote from './quote.js'
 
 
@@ -45,11 +42,11 @@ const MainGame = (props) => {
 
     }
 
-    const getErrWords = () => {
-        let errors = getErrors()
-        return console.log(errors)
-        // return errors.forEach((index)=>{(splitQuote()[index])})
-    }
+    // const getErrWords = () => {
+    //     let errors = getErrors()
+    //     return console.log(errors)
+    //     // return errors.forEach((index)=>{(splitQuote()[index])})
+    // }
 
     const getErrors = () => {return [...new Set(errors)]}
 
@@ -58,10 +55,10 @@ const MainGame = (props) => {
     const handleInput = (e) => {
         let arrQuote = splitQuote() 
         
-          // if (windex == 0 && e.target.value != '') {
+          // if (windex === 0 && e.target.value !== '') {
 
         // }
-        if (e.target.value.length == 1 && windex == 0) {
+        if (e.target.value.length === 1 && windex === 0) {
             let time1 = new Date()
             setStart(time1.getTime())
         }
@@ -77,7 +74,7 @@ const MainGame = (props) => {
                 setErrors(errors => [...errors, windex]);
             }
         }
-        // if((e.target.value).trim() == ''){
+        // if((e.target.value).trim() === ''){
         //         e.target.value = ''
         //     }
 
@@ -89,16 +86,16 @@ const MainGame = (props) => {
             word.className="done"
 
             if (errors.length && errors.includes(windex)) {
-                if(e.target.value == word.innerText)
+                if(e.target.value === word.innerText)
                 {
-                    let node = wordNodes[windex].classList.add('cor')
+                    wordNodes[windex].classList.add('cor')
                     errors.pop(windex)
                 } else {
-                    let node = wordNodes[windex].classList.add('wrong')
+                    wordNodes[windex].classList.add('wrong')
                 }
             }
 
-            if (windex < arrQuote.length-1 && e.target.value != ' ') {
+            if (windex < arrQuote.length-1 && e.target.value !== ' ') {
                 console.log(windex)
                 console.log(arrQuote.length)
                 setWindex(windex+1)
@@ -107,7 +104,7 @@ const MainGame = (props) => {
             e.target.value = ''
 
 
-            if (windex == arrQuote.length-1) {
+            if (windex === arrQuote.length-1) {
                 let time2 = new Date()
                 setEnd(time2.getTime())
                 setIsTyping(false)

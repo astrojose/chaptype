@@ -1,7 +1,5 @@
 import React from 'react'
-import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
 
-import TypingGame from './TypingGame'
 const Home = (props) => {
     return (
       <div>
