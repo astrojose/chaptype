@@ -1,12 +1,14 @@
+import React from 'react'
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
 import './styles/App.css'
-import Welcome from "./components/welcome"
 import Layout from './components/layout'
 import TypingGame from './pages/TypingGame'
 
-function App() {
+function App(props) {
   return (
       <Layout>
-        <TypingGame />
+	     <TypingGame />
       </Layout>
   )
 }

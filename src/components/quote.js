@@ -4,7 +4,9 @@ const Quote = (props) => {
     
     let splitQuote = (quote) => {
         let arrQuote = quote.split(" ")
-        return arrQuote.map( (word,index) => ( <span wordind={index}> { word } </span>))
+        return arrQuote.map( 
+            (word,index) => ( <span wordind={index}> { word } </span>)
+            )
     }
 
     return (

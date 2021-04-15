@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
 
 import Quote from './quote.js'
 
@@ -10,21 +9,20 @@ const MainGame = (props) => {
     let [start, setStart]=React.useState()
     let [end, setEnd]=React.useState()
     let [isTyping, setIsTyping] = React.useState(true)
-
+    let [timer, setTimer] = React.useState('00:00');
+    
     React.useEffect(() => {
         let wordNodes = document.querySelector(".quoteText").childNodes
         if (windex <= wordNodes.length){
             wordNodes.item(windex).className="curr"
+            wordNodes.item(windex).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
         }
     },[windex]);
 
-    // React.useEffect(()=>{
-    //     let wordNodes = document.querySelector(".quoteText").childNodes 
-    //     if (errors.length && errors) {
-    //         let lastErrWord = errors[errors.length - 1]
-    //         let node = wordNodes[lastErrWord].classList.add('wrong')
-    //     }
-    // },[errors]) 
+    React.useEffect(() => {
+      let clock = document.querySelector('.timer')
+      clock.innerText = timer
+    },[timer]);
 
     let parag = props.quote.toLowerCase();
 
@@ -42,65 +40,72 @@ const MainGame = (props) => {
         return ((words-errors)/words * 100).toFixed()
 
     }
+   
+   const pad = (number) => {
+     return (number < 10 ? '0' : '') + number
+   }
 
-    const getErrWords = () => {
-        let errors = getErrors()
-        return console.log(errors)
-        // return errors.forEach((index)=>{(splitQuote()[index])})
+    const getTimer = () =>{
+      let start = Date.now();
+      setInterval(function() {
+          let delta = Date.now() - start; // milliseconds elapsed since start
+          let t= new Date(delta)
+          let tNow = pad(t.getMinutes())+':'+pad(t.getSeconds())
+          setTimer(tNow);
+      }, 1000);
     }
+    // const getErrWords = () => {
+    //     let errors = getErrors()
+    //     return console.log(errors)
+    //     // return errors.forEach((index)=>{(splitQuote()[index])})
+    // }
 
     const getErrors = () => {return [...new Set(errors)]}
 
     const getErrorsNo = () => {return getErrors().length}
 
     const handleInput = (e) => {
-        let arrQuote = splitQuote()
-          // if (windex == 0 && e.target.value != '') {
-
-        // }
-        if (e.target.value.length == 1 && windex == 0) {
-            console.log("SHIT STARTED")
+        let arrQuote = splitQuote() 
+        if (e.target.value.length === 1 && windex === 0) {
             let time1 = new Date()
             setStart(time1.getTime())
+            getTimer()
         }
         if(!(e.target.value).endsWith(' ')){
-            console.log(windex)
-            console.log(arrQuote[windex])
-
             if(arrQuote[windex].startsWith((e.target.value).trim()))
             {
-                console.log(e.target.value)
-                console.log("is valid")
+                return
             }
             else {
                 console.log("shit is wrong")
-
-                // setSearches(searches => [...searches, query])
                 setErrors(errors => [...errors, windex]);
             }
         }
-        // if((e.target.value).trim() == ''){
-        //         e.target.value = ''
-        //     }
-
         else {
-            console.log("the space is here")
-            // [...new Set(array)]; --> skip dupes
-            e.target.value = ''
             let wordNodes = document.querySelector(".quoteText").childNodes
-            wordNodes.item(windex).className="done"
+            let word = wordNodes.item(windex)
+            word.className="done"
 
             if (errors.length && errors.includes(windex)) {
-                let node = wordNodes[windex].classList.add('wrong')
+                if(e.target.value === word.innerText)
+                {
+                    wordNodes[windex].classList.add('cor')
+                    errors.pop(windex)
+                } else {
+                    wordNodes[windex].classList.add('wrong')
+                }
             }
-            
-            if (windex < arrQuote.length-1) {
+
+            if (windex < arrQuote.length-1 && e.target.value !== ' ') {
                 console.log(windex)
                 console.log(arrQuote.length)
                 setWindex(windex+1)
             }
 
-            if (windex == arrQuote.length-1) {
+            e.target.value = ''
+
+
+            if (windex === arrQuote.length-1) {
                 let time2 = new Date()
                 setEnd(time2.getTime())
                 setIsTyping(false)
@@ -112,31 +117,43 @@ const MainGame = (props) => {
                 <Quote data={parag} wordInd={windex}/>
                 <div className="current">
                     <div className="input">
-                        <input name="typed"
-                            placeholder="Type the above text here ..."
-                            autoFocus
-                            onInput={ handleInput }
-                            />
-                        <div className="actions">
-                            <button onClick={()=>{window.location.reload()}}>Restart</button>
-                        </div>
+                        <input
+                          name="typed"
+                          autoFocus
+                          placeholder="type here ..."
+                          onInput={ handleInput }
+                        />
                     </div>
-                    <div className="status"> </div>
+                    <div className="actions">
+                        <span className='timer'></span>
+                        <button
+                          onClick={
+                            ()=>{
+                              window.location.reload()
+                            }
+                          }> restart
+                        </button>
+                    </div>
                 </div>
             </div>
         )
 
         let result = (
-        <div className="welcome">
-         <p>Speed: {getWpm()} wpm</p>
-         <p> Acccuracy : {getAccuracy()}%</p>
-         <p> Errors : {getErrorsNo()} words</p>
-         <p> {getErrWords()} </p>
-            <p>Above is your score</p>
+        <div className="result">
+          <div className="result-head">
+            <h1>result</h1>
+          </div>
+          <div className="result-body">
+
+          </div>
+         <span>Speed: {getWpm()} WPM</span>
+         <span> Acccuracy : {getAccuracy()}%</span>
+         <span> Errors : {getErrorsNo()} Words</span>
             <div className="cta">
                 <button onClick={
                     ()=>{window.location.reload()}}
-                    >play again</button>
+                    > restart [ctrl+r]
+                </button>
             </div>
         </div>
         )
