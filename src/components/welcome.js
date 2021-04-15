@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Welcome = () => {
     return (
@@ -7,12 +8,9 @@ const Welcome = () => {
                <p>Master your typing abilities with diverse typing games. Get started</p>
             </div>
             <div className="cta">
-                <button onClick={
-                  ()=>{
-                    window.location = '/'
-                  }
-                }>Start typing
-                </button>
+                <div className="cta">
+                    <Link to='/type'>Start typing</Link>
+                </div>
             </div>
         </content>
     )

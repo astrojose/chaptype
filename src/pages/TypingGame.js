@@ -1,11 +1,11 @@
 import React from 'react'
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch, HashRouter as Router } from "react-router-dom";
 import swahili from '../random';
 
-import MainGame from '../components/main-game.js'
-
+import MainGame from '../components/main-game'
+import Welcome from '../components/welcome'
 const TypingGame = () => {
-  const sw = new swahili(16);
+  const sw = new swahili(90);
   // let randQuote = quotesArr[(Math.random()*quotesArr.length)|0];
   let randQuote = sw.paragraph()
   
@@ -14,15 +14,15 @@ const TypingGame = () => {
 
   return (
       <div>
-        <Router>
-              {/* <Route path="/" component={MainGame} /> */}
-            <Route  
-              path='/'
-              render={(props) => (
-                <MainGame {...props} quote={randQuote} />
-              )}
-            />
-        </Router>
+            <Switch>
+              <Route exact path="/" component={Welcome} />
+              <Route  exact
+                path='/type'
+                render={(props) => (
+                  <MainGame {...props} quote={randQuote} />
+                )}
+              />
+            </Switch>
       </div>
   )
 }

@@ -8,7 +8,7 @@ import TypingGame from './pages/TypingGame'
 function App(props) {
   return (
       <Layout>
-	  <TypingGame />
+	     <TypingGame />
       </Layout>
   )
 }

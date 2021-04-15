@@ -9,21 +9,20 @@ const MainGame = (props) => {
     let [start, setStart]=React.useState()
     let [end, setEnd]=React.useState()
     let [isTyping, setIsTyping] = React.useState(true)
-
+    let [timer, setTimer] = React.useState('00:00');
+    
     React.useEffect(() => {
         let wordNodes = document.querySelector(".quoteText").childNodes
         if (windex <= wordNodes.length){
             wordNodes.item(windex).className="curr"
+            wordNodes.item(windex).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
         }
     },[windex]);
 
-    // React.useEffect(()=>{
-    //     let wordNodes = document.querySelector(".quoteText").childNodes
-    //     if (errors.length && errors) {
-    //         let lastErrWord = errors[errors.length - 1]
-    //         let node = wordNodes[lastErrWord].classList.add('wrong')
-    //     }
-    // },[errors])
+    React.useEffect(() => {
+      let clock = document.querySelector('.timer')
+      clock.innerText = timer
+    },[timer]);
 
     let parag = props.quote.toLowerCase();
 
@@ -41,7 +40,20 @@ const MainGame = (props) => {
         return ((words-errors)/words * 100).toFixed()
 
     }
+   
+   const pad = (number) => {
+     return (number < 10 ? '0' : '') + number
+   }
 
+    const getTimer = () =>{
+      let start = Date.now();
+      setInterval(function() {
+          let delta = Date.now() - start; // milliseconds elapsed since start
+          let t= new Date(delta)
+          let tNow = pad(t.getMinutes())+':'+pad(t.getSeconds())
+          setTimer(tNow);
+      }, 1000);
+    }
     // const getErrWords = () => {
     //     let errors = getErrors()
     //     return console.log(errors)
@@ -54,13 +66,10 @@ const MainGame = (props) => {
 
     const handleInput = (e) => {
         let arrQuote = splitQuote() 
-        
-          // if (windex === 0 && e.target.value !== '') {
-
-        // }
         if (e.target.value.length === 1 && windex === 0) {
             let time1 = new Date()
             setStart(time1.getTime())
+            getTimer()
         }
         if(!(e.target.value).endsWith(' ')){
             if(arrQuote[windex].startsWith((e.target.value).trim()))
@@ -69,18 +78,10 @@ const MainGame = (props) => {
             }
             else {
                 console.log("shit is wrong")
-
-                // setSearches(searches => [...searches, query])
                 setErrors(errors => [...errors, windex]);
             }
         }
-        // if((e.target.value).trim() === ''){
-        //         e.target.value = ''
-        //     }
-
         else {
-
-            // [...new Set(array)]; --> skip dupes
             let wordNodes = document.querySelector(".quoteText").childNodes
             let word = wordNodes.item(windex)
             word.className="done"
@@ -124,6 +125,7 @@ const MainGame = (props) => {
                         />
                     </div>
                     <div className="actions">
+                        <span className='timer'></span>
                         <button
                           onClick={
                             ()=>{

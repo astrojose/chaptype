@@ -8,7 +8,7 @@ const Home = (props) => {
                 <p>Master your typing abilities with diverse typing games. Get started</p>
                 </div>
                 <div className="cta">
-                    <button onClick={()=>{window.location = '/typing-test'}}>Start typing</button>
+                    <a href='/type'>Start typing</a>
                 </div>
             </content>
     
