@@ -144,6 +144,9 @@ content {
   display: flex;
   flex-direction: column;
 }
+.quote .text p {
+overflow: hidden;
+}
 
 .typing .quote {
   border-bottom: solid 2px grey;
@@ -151,17 +154,21 @@ content {
   background-color: linen;
   border-radius: inherit;
   height: 142px;
-  overflow:auto;
-
+  overflow:hidden;
 }
 
-.typing .quote p {
+.typing .quote .text {
+  overflow: auto;
+}
+
+
+.typing .quote .text p {
   font-family: Times New Roman, Times, serif;
   font-size: 2.2em;
   padding: 5px;
 }
 
-.typing .quote p span.now {
+.typing .quote .text span.now {
   background-color: #c9c7c7;
 }
 
