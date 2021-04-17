@@ -6,8 +6,16 @@ const Footer = () => {
         <footer>
             <div className='links'>
                 <ul>
-                    <li><a href="https://instagram.com/chaptyp">instagram</a></li>
-                    <li><a href="https://github.com/astrojose/chaptype">github</a></li>
+                    <li>
+                      <a href="https://instagram.com/chaptyp" target="_blank" rel="noreferrer">
+                       Instagram
+                       </a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/astrojose/chaptype" target="_blank" rel="noreferrer"> 
+                       Github
+                      </a>
+                    </li>
                 </ul>
             </div>
             <div className="copyright">

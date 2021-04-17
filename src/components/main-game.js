@@ -21,7 +21,9 @@ const MainGame = (props) => {
 
     React.useEffect(() => {
       let clock = document.querySelector('.timer')
-      clock.innerText = timer
+      if( clock != null ){
+        clock.innerText = timer
+      }
     },[timer]);
 
     let parag = props.quote.toLowerCase();

@@ -1,9 +1,10 @@
 import React from 'react'
-import { Route, Switch, HashRouter as Router } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import swahili from '../random';
 
-import MainGame from '../components/main-game'
-import Welcome from '../components/welcome'
+import MainGame from '../components/main-game.js'
+import Welcome from '../components/welcome.js'
+
 const TypingGame = () => {
   const sw = new swahili(20);
   // let randQuote = quotesArr[(Math.random()*quotesArr.length)|0];
