@@ -11,9 +11,11 @@ const Quote = (props) => {
 
     return (
         <div className="quote">
-            <p className="quoteText">
-                {splitQuote(props.data)}   
-            </p>
+            <div className='text'>
+                <p className="quoteText">
+                    {splitQuote(props.data)}   
+                </p>
+            </div>
         </div>
         )
 }

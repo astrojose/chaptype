@@ -81,13 +81,13 @@ a {
 }
 
 .App content .cta {
-  margin: 25px 0px;
+  margin: 2px 0px;
 }
 
-.App content .cta button {
-  padding: 10px 4px;
+.App content .cta  {
+  padding: 2px 4px;
   background-color: yellowgreen;
-  font-size: 1.5em;
+  font-size: 1em;
   color: white;
   cursor: pointer;
   border-radius: 10px;
@@ -135,14 +135,17 @@ a {
   border: solid 2px grey;
   border-radius: 10px;
   min-width: 360px;
-  max-width: 720px;
-  height: 280px;
+  max-width: 900px;
   width: 100%;
   margin: 20px auto;
+  padding: 5px;
 }
 content {
   display: flex;
   flex-direction: column;
+}
+.quote .text p {
+overflow: hidden;
 }
 
 .typing .quote {
@@ -151,17 +154,21 @@ content {
   background-color: linen;
   border-radius: inherit;
   height: 142px;
-  overflow:auto;
-
+  overflow:hidden;
 }
 
-.typing .quote p {
+.typing .quote .text {
+  overflow: auto;
+}
+
+
+.typing .quote .text p {
   font-family: Times New Roman, Times, serif;
   font-size: 2.2em;
   padding: 5px;
 }
 
-.typing .quote p span.now {
+.typing .quote .text span.now {
   background-color: #c9c7c7;
 }
 
@@ -187,11 +194,18 @@ content {
 
 .typing .current .actions button {
   cursor: pointer;
-  color: #fff;
   background-color: lightsteelblue;
   font-size: 1.5em;
   padding: 10px 10px;
   border-radius: 10px;
+}
+.timer {
+  display: inline-block;
+  font-size: 1.5rem;
+  background-color: greenyellow;
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin: 0 10px;
 }
 
 .status {
@@ -222,6 +236,13 @@ content {
 .cor {
     color:rgb(221, 221, 155);
 }
+.actions {
+  display: flex;
+  
+}
+
+
+
 
 @media screen and (max-width: 720px) {
   .typing .current {
@@ -231,8 +252,17 @@ content {
     text-align: center;
   }
 
+  .actions {
+    flex-direction: column;
+  }
+
   .actions button {
-    margin-top: 5px;
+    margin-top: 10px;
+  }
+
+  .timer {
+    margin-top: 10px;
+
   }
 
   .typing .quote p {

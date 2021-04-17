@@ -21,7 +21,9 @@ const MainGame = (props) => {
 
     React.useEffect(() => {
       let clock = document.querySelector('.timer')
-      clock.innerText = timer
+      if( clock != null ){
+        clock.innerText = timer
+      }
     },[timer]);
 
     let parag = props.quote.toLowerCase();
@@ -126,7 +128,7 @@ const MainGame = (props) => {
                     </div>
                     <div className="actions">
                         <span className='timer'></span>
-                        <button
+                        <button className='restart'
                           onClick={
                             ()=>{
                               window.location.reload()
