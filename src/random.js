@@ -1,7 +1,7 @@
 const list = require("./data/words.json");
 
 /**
- * Generate an swahili of words
+ * Generate an array of swahili words
  *
  * @param Integer word_count
  * @return Array|String

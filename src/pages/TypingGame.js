@@ -6,7 +6,7 @@ import MainGame from '../components/main-game.js'
 import Welcome from '../components/welcome.js'
 
 const TypingGame = () => {
-  const sw = new swahili(20);
+  const sw = new swahili(58);
   // let randQuote = quotesArr[(Math.random()*quotesArr.length)|0];
   let randQuote = sw.paragraph()
   

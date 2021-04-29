@@ -15,7 +15,7 @@ const MainGame = (props) => {
         let wordNodes = document.querySelector(".quoteText").childNodes
         if (windex <= wordNodes.length){
             wordNodes.item(windex).className="curr"
-            wordNodes.item(windex).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+            wordNodes.item(windex).scrollIntoView({block: "center", inline: "nearest"})
         }
     },[windex]);
 
