@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "homepage": "https://chaptyp.netlify.app",
+=======
+  "homepage": "https://chaptype.netlify.app",
+>>>>>>> 14e7be50f7bba3d79cb48b2576a03939a23b412e
   "name": "chaptype",
   "version": "0.1.0",
   "private": true,
