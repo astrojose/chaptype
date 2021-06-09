@@ -26,8 +26,9 @@ const MainGame = (props) => {
       }
     },[timer]);
 
-    let parag = props.quote.toLowerCase();
-
+    let parag = props.quote;
+    let source = props.source
+    let author = props.author
     const splitQuote = () => { return  parag.split(" ")}
 
     const getWpm = () => {
@@ -62,6 +63,14 @@ const MainGame = (props) => {
     //     // return errors.forEach((index)=>{(splitQuote()[index])})
     // }
 
+    const getAuthor = () => {
+      return author
+    }
+
+    const getSource = () => {
+      return source
+    }
+    
     const getErrors = () => {return [...new Set(errors)]}
 
     const getErrorsNo = () => {return getErrors().length}
@@ -139,7 +148,12 @@ const MainGame = (props) => {
                 </div>
             </div>
         )
-
+        
+        let reference = (
+        <>
+         <span> From: {getSource()} by {getAuthor()}</span><br/>
+       </> 
+        )
         let result = (
         <div className="result">
           <div className="result-head">
@@ -148,9 +162,11 @@ const MainGame = (props) => {
           <div className="result-body">
 
           </div>
-         <span>Speed: {getWpm()} WPM</span>
-         <span> Acccuracy : {getAccuracy()}%</span>
-         <span> Errors : {getErrorsNo()} Words</span>
+         <span>Speed: {getWpm()} WPM</span> <br/>
+         <span> Acccuracy : {getAccuracy()}%</span><br/>
+         {(props.source) ?  reference : null}
+         <span> Errors : {getErrorsNo()} Words</span><br/>
+
             <div className="cta">
                 <button onClick={
                     ()=>{window.location.reload()}}

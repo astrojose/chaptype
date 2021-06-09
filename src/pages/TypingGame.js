@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch } from "react-router-dom";
 import swahili from '../random';
+import {getQuote} from '../utils'
 
 import MainGame from '../components/main-game.js'
 import Welcome from '../components/welcome.js'
@@ -10,17 +11,23 @@ const TypingGame = () => {
   // let randQuote = quotesArr[(Math.random()*quotesArr.length)|0];
   let randQuote = sw.paragraph()
   
-  
-  // let phrase = "Wahusika hao, ambao kwa kawaida ni mmoja au wawili hujitokeza kutoka mwanzo hadi mwisho wa hadithi. Mara kwa mara wahusika hawa"
+  //let phrase = "Wahusika hao, ambao kwa kawaida ni mmoja au wawili hujitokeza kutoka mwanzo hadi mwisho wa hadithi. Mara kwa mara wahusika hawa"
+  let phrase = getQuote()
 
   return (
       <div>
             <Switch>
               <Route exact path="/" component={Welcome} />
               <Route  exact
-                path='/type'
+                path='/random'
                 render={(props) => (
-                  <MainGame {...props} quote={randQuote} />
+                  <MainGame {...props} quote={randQuote}  />
+                )}
+              />
+              <Route  exact
+                path='/quotes'
+                render={(props) => (
+                  <MainGame {...props} quote={phrase.quote} author={phrase.author} source={phrase.book} />
                 )}
               />
             </Switch>
