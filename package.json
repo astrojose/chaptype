@@ -1,6 +1,6 @@
 {
-  "homepage": "https://astrojose.github.io/chaptype",
-  "name": "chaptype",
+  "homepage": "https://chaptyp.netlify.app",
+  "name": "Chaptyp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

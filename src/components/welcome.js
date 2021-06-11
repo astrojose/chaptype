@@ -3,13 +3,17 @@ import {Link} from 'react-router-dom'
 
 const Welcome = () => {
     return (
-        <content>
+        <content className='home '>
             <div className="welcome">
-               <p>Master your typing abilities with diverse typing games. Get started</p>
+               <p>Master your typing abilities with diverse swahili typing test.</p>
+                <p>Get started</p>
             </div>
-            <div className="cta">
+            <div className="buttons">
                 <div className="cta">
-                    <Link to='/type'>Start typing</Link>
+                    <Link to='/random'> Words</Link>
+                </div>
+                <div className="cta">
+                    <Link to='/quotes'> Quotes</Link>
                 </div>
             </div>
         </content>
