@@ -7,19 +7,25 @@ const Footer = () => {
             <div className='links'>
                 <ul>
                     <li>
-                      <a href="https://instagram.com/chaptyp" target="_blank" rel="noreferrer">
+                      <a 
+                        href="https://instagram.com/chaptyp" 
+                        target="_blank" rel="noreferrer"
+                        className='primary'>
                        Instagram
                        </a>
                     </li>
                     <li>
-                      <a href="https://github.com/astrojose/chaptype" target="_blank" rel="noreferrer"> 
+                      <a 
+                        href="https://github.com/astrojose/chaptype" 
+                        target="_blank" rel="noreferrer"
+                        className='primary'> 
                        Github
                       </a>
                     </li>
                 </ul>
             </div>
             <div className="copyright">
-                <p> &copy; <a href="/">chaptyp</a>, {new Date().getFullYear()}</p>
+                <p> &copy; <a href="/" className='primary'>Chaptyp</a>, {new Date().getFullYear()}</p>
             </div>
         </footer>
     )

@@ -137,12 +137,19 @@ const MainGame = (props) => {
                     </div>
                     <div className="actions">
                         <span className='timer'></span>
-                        <button className='restart'
+                        <button className='action'
                           onClick={
                             ()=>{
                               window.location.reload()
                             }
-                          }> restart
+                          }> Restart
+                        </button>
+                        <button className='action'
+                          onClick={
+                            ()=>{
+                              window.location = '/'
+                            }
+                          }> Cancel
                         </button>
                     </div>
                 </div>

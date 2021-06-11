@@ -17,7 +17,6 @@ const TypingGame = () => {
   return (
       <div>
             <Switch>
-              <Route exact path="/" component={Welcome} />
               <Route  exact
                 path='/random'
                 render={(props) => (

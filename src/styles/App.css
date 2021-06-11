@@ -1,3 +1,9 @@
+:root {
+  --main-bg: #051622;
+  --primary: #1BA098;
+  --color1: #DEB992;
+}
+
 *, body {
   margin: 0;
   padding: 0;
@@ -9,6 +15,15 @@
 
 html {
   height: 100%;
+}
+
+.primary {
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.active {
+  color: var(--color1);
 }
 
 a {
@@ -24,18 +39,20 @@ a {
   position: relative;
   width: 100%;
   min-height: 100%;
+  background-color: var(--main-bg);
   margin: auto;
   min-width: 320px;
+  color: gray;
 }
 
 .App .top-nav {
-  background-color: lightsteelblue;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding-top: 0px;
 }
 
 .App .top-nav .logo {
@@ -43,8 +60,8 @@ a {
 }
 
 .App .top-nav .logo a {
-  font-size: 2em;
   font-weight: 500;
+  color: var(--primary) !important;
 }
 
 .App .top-nav .nav {
@@ -57,9 +74,6 @@ a {
   list-style: none;
 }
 
-.App .top-nav .nav ul li a {
-  font-size: 1.5em;
-}
 
 .App content {
   display: -webkit-box;
@@ -73,20 +87,19 @@ a {
       -ms-flex-align: center;
           align-items: center;
   justify-items: center;
-  background-color: #85d885;
   height: 100vh;
 }
 
 .App content .welcome p {
   padding: 5px 10px;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   text-align: center;
   
 }
 .app content .buttons{
   display: flex;
   justify-content: space-between;
-  width: 500px;
+
   margin: 80px auto;
 }
 
@@ -95,18 +108,18 @@ a {
   font-family: 2rem;
   background-image: url(../asset/cover.png);
   background-repeat:no-repeat;
-  background-position: center center;
+  background-position: bottom center;
 }
 
 .App content .welcome {
-  margin-top: 60px;
+  margin-top: 20px;
 }
 .App content .cta {
   margin: 5px 5px;
 }
 .App content .buttons .cta  {
   padding: 2px 4px;
-  background-color: yellowgreen;
+  background-color: var(--color1);
   font-size: 1em;
   color: white;
   cursor: pointer;
@@ -118,11 +131,11 @@ a {
 .App content .buttons .cta a {
   width: 100%;
   height: 100%;
+  color: var(--main-bg);
   font-size: 1.4rem;
 }
 
 .App footer {
-  background-color: lightsteelblue;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -136,6 +149,7 @@ a {
   /* height: 100px; */
   position:relative;
   bottom: 0;
+  color: var(--primary);
   width: 100%;
 
 }
@@ -221,12 +235,13 @@ overflow: hidden;
   font-size: 1.5em;
   padding: 10px 10px;
   border-radius: 10px;
+  margin: 0 10px;
 }
 .timer {
   display: inline-block;
   font-size: 1.5rem;
-  background-color: greenyellow;
   padding: 10px 10px;
+  color: var(--primary);
   border-radius: 10px;
   margin: 0 10px;
 }
@@ -268,6 +283,17 @@ overflow: hidden;
 
 
 @media screen and (max-width: 425px) {
+  .typing .current .actions button{
+    margin: 5px 0;
+  }
+
+  .App content .welcome {
+    margin-top: 5px;
+  }
+  .App content .welcome p {
+    font-size: 1.4rem;
+  }
+
   .typing .current {
     margin-top: 20px;
     display: flex;
@@ -290,7 +316,11 @@ overflow: hidden;
 
   .typing .quote p {
     font-family: Times New Roman, Times, serif;
-    font-size: 1.6em;
+    font-size: 1em;
+    padding: 5px;
+  }
+  .typing {
+    margin: 20px 20px;
     padding: 5px;
   }
 
