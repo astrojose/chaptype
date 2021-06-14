@@ -3,11 +3,6 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 
 const Navbar = () => {
-    let location = useLocation();
-    const { pathname } = location;
-
-    const splitLocation = pathname.split("/");
-
     return (
         <div className="top-nav">
             <div className="logo">

@@ -4,13 +4,12 @@ import swahili from '../random';
 import {getQuote} from '../utils'
 
 import MainGame from '../components/main-game.js'
-import Welcome from '../components/welcome.js'
 
 const TypingGame = () => {
   const sw = new swahili(58);
   // let randQuote = quotesArr[(Math.random()*quotesArr.length)|0];
   let randQuote = sw.paragraph()
-  
+
   //let phrase = "Wahusika hao, ambao kwa kawaida ni mmoja au wawili hujitokeza kutoka mwanzo hadi mwisho wa hadithi. Mara kwa mara wahusika hawa"
   let phrase = getQuote()
 
