@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "chaptyp"
+    "default": "chaptyp",
+    "f": "chaptyp"
   }
 }
