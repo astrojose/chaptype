@@ -15,7 +15,7 @@ const MainGame = (props) => {
         let wordNodes = document.querySelector(".quoteText").childNodes
         if (windex <= wordNodes.length){
             wordNodes.item(windex).className="curr"
-            wordNodes.item(windex).scrollIntoView({block: "center", inline: "nearest"})
+            wordNodes.item(windex).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
         }
     },[windex]);
 
@@ -29,6 +29,7 @@ const MainGame = (props) => {
     let parag = props.quote;
     let source = props.source
     let author = props.author
+
     const splitQuote = () => { return  parag.split(" ")}
 
     const getWpm = () => {
@@ -137,17 +138,10 @@ const MainGame = (props) => {
                     </div>
                     <div className="actions">
                         <span className='timer'></span>
-                        <button className='action'
+                        <button className='restart'
                           onClick={
                             ()=>{
-                              window.location.reload()
-                            }
-                          }> Restart
-                        </button>
-                        <button className='action'
-                          onClick={
-                            ()=>{
-                              window.location = '/'
+                              props.history.goBack()
                             }
                           }> Cancel
                         </button>
@@ -159,7 +153,7 @@ const MainGame = (props) => {
         let reference = (
         <>
          <span> From: {getSource()} by {getAuthor()}</span><br/>
-       </> 
+        </> 
         )
         let result = (
         <div className="result">
