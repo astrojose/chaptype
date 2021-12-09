@@ -83,12 +83,12 @@ const MainGame = (props) => {
             getTimer()
         }
         if(!(e.target.value).endsWith(' ')){
-            if(arrQuote[windex].startsWith((e.target.value).trim()))
+            let typed = (e.target.value).trim()
+          if(arrQuote[windex].startsWith(typed))
             {
                 return
             }
             else {
-                console.log("shit is wrong")
                 setErrors(errors => [...errors, windex]);
             }
         }
@@ -108,8 +108,6 @@ const MainGame = (props) => {
             }
 
             if (windex < arrQuote.length-1 && e.target.value !== ' ') {
-                console.log(windex)
-                console.log(arrQuote.length)
                 setWindex(windex+1)
             }
 
