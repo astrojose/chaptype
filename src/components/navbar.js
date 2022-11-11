@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <div className="top-nav">
             <div className="logo">
-                <NavLink to='/' className='primary'>chaptyp.club</NavLink>
+                <NavLink to='/' className='primary'>chaptyp</NavLink>
             </div>
 
             <nav className="nav">
