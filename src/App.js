@@ -1,15 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { RouterProvider } from 'react-router-dom';
 
-import './styles/App.css'
-import Layout from './components/layout'
-import TypingGame from './pages/TypingGame'
+import './styles/App.css';
+import { createAppRouter } from './router';
 
-function App(props) {
-  return (
-      <Layout>
-	     <TypingGame />
-      </Layout>
-  )
+function App() {
+  const router = React.useMemo(() => createAppRouter(), []);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

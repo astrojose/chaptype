@@ -1,327 +1,356 @@
 :root {
-  --main-bg: #051622;
-  --primary: #1BA098;
-  --color1: #DEB992;
+  --bg: #071622;
+  --surface: #0f2434;
+  --surface-alt: #133047;
+  --surface-soft: #f2f6f9;
+  --text: #f3f7fb;
+  --text-muted: #9ab0c1;
+  --accent: #30c5a1;
+  --accent-strong: #1d9f81;
+  --border: rgba(154, 176, 193, 0.2);
+  --danger: #ff8c82;
+  --success: #7dd3a7;
 }
 
-*, body {
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
   margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-html {
-  height: 100%;
-}
-
-.primary {
-  color: var(--primary);
-  font-size: 1.2rem;
-}
-
-.active {
-  color: var(--color1);
+  background: linear-gradient(180deg, #071622 0%, #0a1d2c 100%);
+  color: var(--text);
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 
-.root {
-  height: 100%;
-  width: 100%;
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 .App {
-  position: relative;
-  width: 100%;
-  min-height: 100%;
-  background-color: var(--main-bg);
-  margin: auto;
-  min-width: 320px;
-  color: gray;
-}
-
-.App .top-nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding-top: 0px;
-}
-
-.App .top-nav .logo {
-  padding: 24px;
-}
-
-.App .top-nav .logo a {
-  font-weight: 500;
-  color: var(--primary) !important;
-}
-
-.App .top-nav .nav {
-  margin: 24px 24px;
-}
-
-.App .top-nav .nav ul li {
-  margin: 0 20px;
-  display: inline-block;
-  list-style: none;
-}
-
-
-.App content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  justify-items: center;
-  height: 100vh;
-}
-
-.App content .welcome p {
-  padding: 5px 10px;
-  font-size: 1.8rem;
-  text-align: center;
-  
-}
-.app content .buttons{
-  display: flex;
-  justify-content: space-between;
-
-  margin: 80px auto;
-}
-
-
-.App content.home {
-  font-family: 2rem;
-  background-image: url(../asset/cover.png);
-  background-repeat:no-repeat;
-  background-position: bottom center;
-}
-
-.App content .welcome {
-  margin-top: 20px;
-}
-.App content .cta {
-  margin: 5px 5px;
-}
-.App content .buttons .cta  {
-  padding: 2px 4px;
-  background-color: var(--color1);
-  font-size: 1em;
-  color: white;
-  cursor: pointer;
-  border-radius: 2px;
-  height: 30px;
-  width: 180px;
-  text-align: center;
-}
-.App content .buttons .cta a {
-  width: 100%;
-  height: 100%;
-  color: var(--main-bg);
-  font-size: 1.4rem;
-}
-
-.App footer {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  /* height: 100px; */
-  position:relative;
-  bottom: 0;
-  color: var(--primary);
-  width: 100%;
-
-}
-
-.App footer .links ul {
-  padding: 10px 10px;
-}
-
-.App footer .links ul li {
-  margin: 0 10px;
-  display: inline-block;
-  list-style: none;
-}
-
-.App footer .copyright p {
-  padding: 10px;
-}
-
-.typing {
-  border: solid 2px grey;
-  border-radius: 10px;
-  min-width: 360px;
-  max-width: 900px;
-  width: 100%;
-  margin: 20px auto;
-  padding: 5px;
-}
-content {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-.quote .text p {
-overflow: hidden;
-}
 
-.typing .quote {
-  border-bottom: solid 2px grey;
-  margin-bottom: 10px;
-  background-color: linen;
-  border-radius: inherit;
-  height: 142px;
-  overflow:hidden;
-}
-
-.typing .quote .text {
-  overflow: auto;
-}
-
-
-.typing .quote .text p {
-  font-family: Times New Roman, Times, serif;
-  font-size: 2.2em;
-  padding: 5px;
-}
-
-.typing .quote .text span.now {
-  background-color: #c9c7c7;
-}
-
-.typing .current {
-  margin-top: 20px;
+.top-nav {
   display: flex;
-  flex-direction: row;
-  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.typing .current .input {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0 20px;
-}
-
-.typing .current .input input {
-  background-color: lightgoldenrodyellow;
-  font-size: 1.5em;
-  padding: 10px 10px;
-  border-radius: 10px;
-  width: 200px;
-}
-
-.typing .current .actions button {
-  cursor: pointer;
-  background-color: lightsteelblue;
-  font-size: 1.5em;
-  padding: 10px 10px;
-  border-radius: 10px;
-  margin: 0 10px;
-}
-.timer {
-  display: inline-block;
+.brand-mark {
   font-size: 1.5rem;
-  padding: 10px 10px;
-  color: var(--primary);
-  border-radius: 10px;
-  margin: 0 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
-.status {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.nav-links {
   display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.status .timer p {
-  font-size: 3em;
-  font-family: monospace;
-}
-/*# sourceMappingURL=App.css.map */
-
-.curr {
-  background-color: rgb(153, 79, 221);
-  color:white;
-  border-radius: 2px;
+.nav-link {
+  color: var(--text-muted);
 }
 
-.done {
-  color: rgb(173, 172, 172)
+.nav-link.active,
+.nav-link:hover,
+.primary {
+  color: var(--accent);
 }
 
-.wrong{
-  color: rgb(240, 128, 128);
+.app-shell {
+  flex: 1;
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
 }
-.cor {
-    color:rgb(221, 221, 155);
-}
-.actions {
+
+.page {
   display: flex;
-  
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
+.page-header,
+.hero-card,
+.mode-card,
+.typing-card,
+.practice-reference,
+.result-card,
+.result-details,
+.state-page {
+  background: rgba(15, 36, 52, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
 
+.hero-card,
+.mode-card,
+.typing-card,
+.practice-reference,
+.result-details,
+.state-page {
+  padding: 1.5rem;
+}
 
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+}
 
-@media screen and (max-width: 425px) {
-  .typing .current .actions button{
-    margin: 5px 0;
-  }
+.eyebrow,
+.status-label {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
 
-  .App content .welcome {
-    margin-top: 5px;
-  }
-  .App content .welcome p {
-    font-size: 1.4rem;
-  }
+h1,
+h2,
+p {
+  margin: 0;
+}
 
-  .typing .current {
-    margin-top: 20px;
-    display: flex;
+.page-summary {
+  max-width: 60ch;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.mode-grid,
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mode-meta-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.mode-meta-list li,
+.practice-metadata span {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(48, 197, 161, 0.12);
+  color: var(--text);
+  border: 1px solid rgba(48, 197, 161, 0.18);
+}
+
+.primary-action,
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+}
+
+.primary-action {
+  background: var(--accent);
+  color: #082033;
+  font-weight: 700;
+}
+
+.primary-action:hover {
+  background: var(--accent-strong);
+}
+
+.secondary-action {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.typing-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.typing-card__status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.practice-metadata,
+.typing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.quote {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: var(--surface-soft);
+  color: #153047;
+}
+
+.quoteText {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  line-height: 1.8;
+}
+
+.quote-word {
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.45rem;
+}
+
+.quote-word.is-current {
+  background: rgba(48, 197, 161, 0.18);
+}
+
+.quote-word.is-current.matches-current {
+  box-shadow: inset 0 0 0 1px rgba(48, 197, 161, 0.45);
+}
+
+.quote-word.is-current.has-error,
+.quote-word.is-incorrect {
+  background: rgba(255, 140, 130, 0.2);
+  color: #8f2721;
+}
+
+.quote-word.is-correct {
+  color: #1a7b4d;
+}
+
+.typing-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.input-label {
+  font-weight: 600;
+}
+
+#typing-input {
+  min-height: 3.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(7, 22, 34, 0.16);
+  background: #fff;
+}
+
+#typing-input:focus {
+  outline: 2px solid rgba(48, 197, 161, 0.35);
+  border-color: var(--accent);
+}
+
+.practice-reference dl,
+.result-details dl {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+}
+
+.practice-reference div,
+.result-details div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.practice-reference dt,
+.result-details dt {
+  color: var(--text-muted);
+}
+
+.results-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.result-card {
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.result-card span {
+  display: block;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.result-card strong {
+  font-size: 1.75rem;
+}
+
+.site-footer {
+  padding: 1rem 2rem 2rem;
+  color: var(--text-muted);
+}
+
+.site-footer .links ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.75rem;
+}
+
+@media (max-width: 720px) {
+  .top-nav,
+  .page-header {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
   }
 
-  .actions {
-    flex-direction: column;
+  .app-shell {
+    width: min(100%, calc(100% - 1.5rem));
   }
 
-  .actions button {
-    margin-top: 10px;
+  .quoteText {
+    font-size: 1.15rem;
   }
-
-  .timer {
-    margin-top: 10px;
-
-  }
-
-  .typing .quote p {
-    font-family: Times New Roman, Times, serif;
-    font-size: 1em;
-    padding: 5px;
-  }
-  .typing {
-    margin: 20px 20px;
-    padding: 5px;
-  }
-
 }

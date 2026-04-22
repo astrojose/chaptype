@@ -1,191 +1,193 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import Quote from './quote.js'
+import Quote from './quote';
 
+const formatDuration = (totalSeconds) => {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
 
-const MainGame = (props) => {
-    let [windex, setWindex] = React.useState(0)
-    let [errors,setErrors]= React.useState([])
-    let [start, setStart]=React.useState()
-    let [end, setEnd]=React.useState()
-    let [isTyping, setIsTyping] = React.useState(true)
-    let [timer, setTimer] = React.useState('00:00');
-    
-    React.useEffect(() => {
-        let wordNodes = document.querySelector(".quoteText").childNodes
-        if (windex <= wordNodes.length){
-            wordNodes.item(windex).className="curr"
-            wordNodes.item(windex).scrollIntoView({block: "center", inline: "nearest"})
-        }
-    },[windex]);
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+};
 
-    React.useEffect(() => {
-      let clock = document.querySelector('.timer')
-      if( clock != null ){
-        clock.innerText = timer
-      }
-    },[timer]);
+const buildResult = ({ words, wordResults, startedAt, finishedAt }) => {
+  const elapsedMilliseconds = Math.max(finishedAt - startedAt, 1000);
+  const elapsedMinutes = elapsedMilliseconds / 60000;
+  const correctWords = wordResults.filter((result) => result === 'correct').length;
+  const errors = wordResults.filter((result) => result === 'incorrect').length;
+  const totalCharacters = words.join(' ').length;
 
-    let parag = props.quote;
-    let source = props.source
-    let author = props.author
-    const splitQuote = () => { return  parag.split(" ")}
+  return {
+    elapsedSeconds: Math.max(1, Math.round(elapsedMilliseconds / 1000)),
+    wpm: Math.max(1, Math.round((totalCharacters / 5) / elapsedMinutes)),
+    accuracy: Math.round((correctWords / words.length) * 100),
+    errors,
+    correctWords,
+    totalWords: words.length,
+    completedAt: new Date(finishedAt).toISOString(),
+  };
+};
 
-    const getWpm = () => {
-        let words = windex + 1
-        let durr = (end - start)/1000/60
-        return ((words)/durr).toFixed()
+const MainGame = ({ session, mode, onRestart }) => {
+  const navigate = useNavigate();
+  const inputRef = React.useRef(null);
+  const words = React.useMemo(() => session.text.trim().split(/\s+/), [session.text]);
+  const [typedValue, setTypedValue] = React.useState('');
+  const [currentWordIndex, setCurrentWordIndex] = React.useState(0);
+  const [wordResults, setWordResults] = React.useState(() => Array(words.length).fill(null));
+  const [startedAt, setStartedAt] = React.useState(null);
+  const [elapsedSeconds, setElapsedSeconds] = React.useState(0);
+
+  React.useEffect(() => {
+    inputRef.current?.focus();
+  }, [session.id]);
+
+  React.useEffect(() => {
+    if (!startedAt) {
+      return undefined;
     }
 
-    const getAccuracy = () => {
-        let errors = getErrorsNo()
-        let words = splitQuote().length
-        return ((words-errors)/words * 100).toFixed()
+    const intervalId = window.setInterval(() => {
+      setElapsedSeconds(Math.max(0, Math.floor((Date.now() - startedAt) / 1000)));
+    }, 1000);
 
-    }
-   
-   const pad = (number) => {
-     return (number < 10 ? '0' : '') + number
-   }
+    return () => window.clearInterval(intervalId);
+  }, [startedAt]);
 
-    const getTimer = () =>{
-      let start = Date.now();
-      setInterval(function() {
-          let delta = Date.now() - start; // milliseconds elapsed since start
-          let t= new Date(delta)
-          let tNow = pad(t.getMinutes())+':'+pad(t.getSeconds())
-          setTimer(tNow);
-      }, 1000);
-    }
-    // const getErrWords = () => {
-    //     let errors = getErrors()
-    //     return console.log(errors)
-    //     // return errors.forEach((index)=>{(splitQuote()[index])})
-    // }
+  const currentWord = words[currentWordIndex] ?? '';
 
-    const getAuthor = () => {
-      return author
+  const handleChange = (event) => {
+    const nextValue = event.target.value;
+
+    if (!startedAt && nextValue.trim().length > 0) {
+      setStartedAt(Date.now());
     }
 
-    const getSource = () => {
-      return source
+    if (!nextValue.endsWith(' ')) {
+      setTypedValue(nextValue);
+      return;
     }
-    
-    const getErrors = () => {return [...new Set(errors)]}
 
-    const getErrorsNo = () => {return getErrors().length}
+    const completedWord = nextValue.trim();
 
-    const handleInput = (e) => {
-        let arrQuote = splitQuote() 
-        if (e.target.value.length === 1 && windex === 0) {
-            let time1 = new Date()
-            setStart(time1.getTime())
-            getTimer()
-        }
-        if(!(e.target.value).endsWith(' ')){
-            let typed = (e.target.value).trim()
-          if(arrQuote[windex].startsWith(typed))
-            {
-                return
-            }
-            else {
-                setErrors(errors => [...errors, windex]);
-            }
-        }
-        else {
-            let wordNodes = document.querySelector(".quoteText").childNodes
-            let word = wordNodes.item(windex)
-            word.className="done"
-
-            if (errors.length && errors.includes(windex)) {
-                if(e.target.value === word.innerText)
-                {
-                    wordNodes[windex].classList.add('cor')
-                    errors.pop(windex)
-                } else {
-                    wordNodes[windex].classList.add('wrong')
-                }
-            }
-
-            if (windex < arrQuote.length-1 && e.target.value !== ' ') {
-                setWindex(windex+1)
-            }
-
-            e.target.value = ''
-
-
-            if (windex === arrQuote.length-1) {
-                let time2 = new Date()
-                setEnd(time2.getTime())
-                setIsTyping(false)
-            }
-        }
+    if (!completedWord) {
+      setTypedValue('');
+      return;
     }
-        let typing = (
-            <div className="typing">
-                <Quote data={parag} wordInd={windex}/>
-                <div className="current">
-                    <div className="input">
-                        <input
-                          name="typed"
-                          autoFocus
-                          placeholder="type here ..."
-                          onInput={ handleInput }
-                        />
-                    </div>
-                    <div className="actions">
-                        <span className='timer'></span>
-                        <button className='action'
-                          onClick={
-                            ()=>{
-                              window.location.reload()
-                            }
-                          }> Restart
-                        </button>
-                        <button className='action'
-                          onClick={
-                            ()=>{
-                              window.location = '/'
-                            }
-                          }> Cancel
-                        </button>
-                    </div>
-                </div>
-            </div>
-        )
-        
-        let reference = (
-        <>
-         <span> From: {getSource()} by {getAuthor()}</span><br/>
-       </> 
-        )
-        let result = (
-        <div className="result">
-          <div className="result-head">
-            <h1>result</h1>
-          </div>
-          <div className="result-body">
 
-          </div>
-         <span>Speed: {getWpm()} WPM</span> <br/>
-         <span> Acccuracy : {getAccuracy()}%</span><br/>
-         {(props.source) ?  reference : null}
-         <span> Errors : {getErrorsNo()} Words</span><br/>
+    const isCorrect = completedWord === currentWord;
+    const nextResults = [...wordResults];
+    nextResults[currentWordIndex] = isCorrect ? 'correct' : 'incorrect';
+    const nextStartedAt = startedAt ?? Date.now();
 
-            <div className="cta">
-                <button onClick={
-                    ()=>{window.location.reload()}}
-                    > restart [ctrl+r]
-                </button>
-            </div>
+    if (currentWordIndex === words.length - 1) {
+      const finishedAt = Date.now();
+      const result = buildResult({
+        words,
+        wordResults: nextResults,
+        startedAt: nextStartedAt,
+        finishedAt,
+      });
+
+      setWordResults(nextResults);
+      setTypedValue('');
+      navigate('/results', {
+        replace: true,
+        state: {
+          mode,
+          session,
+          result,
+        },
+      });
+      return;
+    }
+
+    setWordResults(nextResults);
+    setCurrentWordIndex((value) => value + 1);
+    setTypedValue('');
+  };
+
+  return (
+    <section className="page practice-page">
+      <div className="page-header">
+        <div>
+          <p className="eyebrow">Practice mode</p>
+          <h1>{mode.name}</h1>
+          <p className="page-summary">{mode.description}</p>
         </div>
-        )
+        <div className="practice-metadata">
+          <span>{session.meta.category}</span>
+          <span>{session.meta.difficulty}</span>
+          <span>{session.meta.language}</span>
+        </div>
+      </div>
 
-    return (
-        <content>
-            {(!isTyping) ? result : typing}
-        </content>
-    )
-}
+      <div className="typing-card">
+        <div className="typing-card__status">
+          <div>
+            <p className="status-label">Timer</p>
+            <strong>{formatDuration(elapsedSeconds)}</strong>
+          </div>
+          <div>
+            <p className="status-label">Progress</p>
+            <strong>
+              {currentWordIndex + 1}/{words.length}
+            </strong>
+          </div>
+        </div>
 
-export default MainGame
+        <Quote
+          words={words}
+          currentWordIndex={currentWordIndex}
+          currentInput={typedValue}
+          wordResults={wordResults}
+        />
+
+        <div className="typing-controls">
+          <label className="input-label" htmlFor="typing-input">
+            Type the current practice text
+          </label>
+          <input
+            id="typing-input"
+            ref={inputRef}
+            name="typed"
+            autoComplete="off"
+            spellCheck="false"
+            value={typedValue}
+            placeholder="Start typing here"
+            onChange={handleChange}
+            onPaste={(event) => event.preventDefault()}
+          />
+          <div className="typing-actions">
+            <button type="button" className="secondary-action" onClick={onRestart}>
+              Restart
+            </button>
+            <button type="button" className="secondary-action" onClick={() => navigate('/')}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside className="practice-reference">
+        <h2>Content reference</h2>
+        <dl>
+          <div>
+            <dt>Source</dt>
+            <dd>{session.meta.sourceAttribution}</dd>
+          </div>
+          <div>
+            <dt>Origin</dt>
+            <dd>{session.meta.authorOrigin}</dd>
+          </div>
+          <div>
+            <dt>Tags</dt>
+            <dd>{session.meta.tags.join(', ')}</dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+  );
+};
+
+export default MainGame;

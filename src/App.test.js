@@ -1,8 +1,37 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import { RouterProvider } from 'react-router-dom';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/test it/i);
-  expect(linkElement).toBeInTheDocument();
+import { createAppRouter } from './router';
+
+const renderRoute = (initialEntries = ['/']) => {
+  const router = createAppRouter({ initialEntries });
+
+  return render(<RouterProvider router={router} />);
+};
+
+test('renders the available phase 1 practice modes on the home page', () => {
+  renderRoute();
+
+  expect(
+    screen.getByRole('heading', {
+      name: /swahili-first typing practice built around structured learning modes/i,
+    })
+  ).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /start swahili words/i })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /start swahili quotes/i })).toBeInTheDocument();
+});
+
+test('renders a practice session for a valid mode route', () => {
+  renderRoute(['/practice/swahili-words']);
+
+  expect(screen.getByRole('heading', { name: /swahili words/i })).toBeInTheDocument();
+  expect(
+    screen.getByRole('textbox', { name: /type the current practice text/i })
+  ).toBeInTheDocument();
+});
+
+test('renders the dedicated not found page for invalid routes', () => {
+  renderRoute(['/missing']);
+
+  expect(screen.getByRole('heading', { name: /we could not find that page/i })).toBeInTheDocument();
 });

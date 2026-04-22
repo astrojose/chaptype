@@ -1,30 +1,19 @@
-import React from 'react'
-import { Route, Switch } from 'react-router'
-import Footer from './footer'
-import Navbar from './navbar'
-import Tips from '../pages/tips'
-import About from '../pages/about'
-import User from '../pages/user'
-import Welcome from './welcome'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
+import Footer from './footer';
+import Navbar from './navbar';
 
-const Layout = (props) => {
-    return (
-        <div className="App">
-        <header className="App-header">
-            <Navbar />
-            <Switch>
-                <Route exact path="/" component={Welcome} />
-                <Route exact path='/tips' component={Tips} />
-                <Route exact path='/about' component={About} />
-                <Route exact path='/user' component={User} />
-            </Switch>
-        </header>
-          {props.children}
-        <Footer />
-        
+const Layout = () => {
+  return (
+    <div className="App">
+      <Navbar />
+      <main className="app-shell">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
-    )
-}
+  );
+};
 
-export default Layout
+export default Layout;
