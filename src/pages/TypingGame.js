@@ -9,10 +9,22 @@ const TypingGame = () => {
   const { mode: modeId } = useParams();
   const [sessionVersion, setSessionVersion] = React.useState(0);
   const mode = getPracticeMode(modeId);
-  const session = React.useMemo(
-    () => (mode ? getPracticeSession(mode.id) : null),
-    [mode, sessionVersion]
-  );
+  const session = React.useMemo(() => {
+    if (!mode) {
+      return null;
+    }
+
+    const nextSession = getPracticeSession(mode.id);
+
+    if (!nextSession) {
+      return null;
+    }
+
+    return {
+      ...nextSession,
+      id: `${nextSession.id}-${sessionVersion}`,
+    };
+  }, [mode, sessionVersion]);
 
   if (!mode || !session) {
     return <NotFoundPage />;

@@ -3,6 +3,22 @@ import { RouterProvider } from 'react-router-dom';
 
 import { createAppRouter } from './router';
 
+const originalWarn = console.warn;
+
+beforeEach(() => {
+  jest.spyOn(console, 'warn').mockImplementation((message, ...args) => {
+    if (typeof message === 'string' && message.includes('React Router Future Flag Warning')) {
+      return;
+    }
+
+    originalWarn(message, ...args);
+  });
+});
+
+afterEach(() => {
+  console.warn.mockRestore();
+});
+
 const renderRoute = (initialEntries = ['/']) => {
   const router = createAppRouter({ initialEntries });
 

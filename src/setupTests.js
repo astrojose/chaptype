@@ -3,3 +3,11 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+
+if (!global.setImmediate) {
+  global.setImmediate = (callback, ...args) => setTimeout(callback, 0, ...args);
+}
+
+if (!global.clearImmediate) {
+  global.clearImmediate = (handle) => clearTimeout(handle);
+}

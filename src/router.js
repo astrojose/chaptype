@@ -31,8 +31,15 @@ export const createAppRouter = (options = {}) => {
     return createMemoryRouter(routeConfig, {
       initialEntries: options.initialEntries,
       initialIndex: options.initialIndex ?? 0,
+      future: {
+        v7_startTransition: true,
+      },
     });
   }
 
-  return createBrowserRouter(routeConfig);
+  return createBrowserRouter(routeConfig, {
+    future: {
+      v7_startTransition: true,
+    },
+  });
 };
