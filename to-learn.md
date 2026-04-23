@@ -1,2 +1,0 @@
-### CHAPTYPE TO-LEARNs
-- [ ]  
