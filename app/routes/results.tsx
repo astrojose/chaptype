@@ -5,6 +5,16 @@ export function meta() {
   return [{ title: 'Results · Chaptyp' }];
 }
 
+function isInteractiveTarget(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) return false;
+  return (
+    target.isContentEditable ||
+    target.closest('[contenteditable="true"]') !== null ||
+    target.closest('.cmd-palette') !== null ||
+    target.closest('a, button, input, textarea, select') !== null
+  );
+}
+
 export default function ResultsRoute() {
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -14,11 +24,7 @@ export default function ResultsRoute() {
     if (!state?.mode) return;
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key !== 'Enter' || event.defaultPrevented) return;
-      const target = event.target;
-      if (
-        target instanceof HTMLElement &&
-        (target.closest('a, button, input, textarea, select') || target.isContentEditable)
-      ) return;
+      if (isInteractiveTarget(event.target)) return;
       navigate(`/practice/${(state as { mode: { id: string } }).mode.id}`);
     }
     globalThis.addEventListener('keydown', handleKeyDown);

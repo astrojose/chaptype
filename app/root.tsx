@@ -38,7 +38,15 @@ export function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
         <Links />
       </head>
       <body>
-        <a href="#main-content" className="skip-link">Skip to content</a>
+        <a
+          href="#main-content"
+          className="skip-link"
+          onClick={() => {
+            document.getElementById('main-content')?.focus();
+          }}
+        >
+          Skip to content
+        </a>
         <div className="App">
           <header className="top-nav">
             <NavLink to="/" className="brand-mark">
@@ -75,7 +83,9 @@ export function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
               <ThemeToggle onToggle={applyThemeToggle} />
             </div>
           </header>
-          <main className="app-shell" id="main-content">{children}</main>
+          <main className="app-shell" id="main-content" tabIndex={-1}>
+            {children}
+          </main>
           <footer className="site-footer">
             <div className="links">
               <ul>

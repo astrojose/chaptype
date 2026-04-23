@@ -101,6 +101,13 @@ export function CommandPalette({ onToggleTheme }: Readonly<{ onToggleTheme: () =
     }
   }
 
+  function handlePaletteKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      inputRef.current?.focus();
+    }
+  }
+
   if (!open) return null;
 
   return (
@@ -115,6 +122,7 @@ export function CommandPalette({ onToggleTheme }: Readonly<{ onToggleTheme: () =
         aria-modal="true"
         aria-label="Command palette"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={handlePaletteKeyDown}
       >
         <input
           ref={inputRef}
