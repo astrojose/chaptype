@@ -1,8 +1,11 @@
-const http = require('node:http');
-const fs = require('node:fs/promises');
-const path = require('node:path');
+import http from 'node:http';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const { createRequestListener } = require('@react-router/node');
+import { createRequestListener } from '@react-router/node';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const buildServer = () => import('./build/server/index.js');
 const listener = createRequestListener({
@@ -10,7 +13,7 @@ const listener = createRequestListener({
   mode: process.env.NODE_ENV || 'production',
 });
 
-const publicDir = path.join(process.cwd(), 'build/client');
+const publicDir = path.join(__dirname, 'build/client');
 
 const mimeTypes = new Map([
   ['.css', 'text/css; charset=utf-8'],
