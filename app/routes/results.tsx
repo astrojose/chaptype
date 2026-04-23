@@ -9,13 +9,17 @@ export default function ResultsRoute() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  // Enter key → try again (same mode)
+  // Enter key → try again (same mode); ignore if focus is on an interactive element
   React.useEffect(() => {
     if (!state?.mode) return;
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Enter' && !(event.target instanceof HTMLAnchorElement)) {
-        navigate(`/practice/${(state as { mode: { id: string } }).mode.id}`);
-      }
+      if (event.key !== 'Enter' || event.defaultPrevented) return;
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.closest('a, button, input, textarea, select') || target.isContentEditable)
+      ) return;
+      navigate(`/practice/${(state as { mode: { id: string } }).mode.id}`);
     }
     globalThis.addEventListener('keydown', handleKeyDown);
     return () => globalThis.removeEventListener('keydown', handleKeyDown);

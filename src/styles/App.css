@@ -24,6 +24,10 @@
   --dur-slow: 340ms;
 }
 
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 [data-theme="light"] {
   --bg: #f6f8fa;
   --surface: #ffffff;
@@ -55,7 +59,7 @@ body,
 }
 
 html {
-  background: var(--bg);
+  background-color: var(--bg);
   transition: background-color 150ms ease, color 150ms ease;
 }
 

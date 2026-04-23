@@ -40,7 +40,13 @@ export function applyThemeToggle(): void {
 }
 
 export function ThemeToggle({ onToggle }: Readonly<{ onToggle: () => void }>) {
-  const [theme, setTheme] = React.useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = React.useState<'dark' | 'light'>(() => {
+    if (typeof document !== 'undefined') {
+      const current = document.documentElement.getAttribute('data-theme');
+      if (current === 'dark' || current === 'light') return current;
+    }
+    return 'dark';
+  });
 
   React.useEffect(() => {
     const current = document.documentElement.getAttribute('data-theme') as 'dark' | 'light' | null;

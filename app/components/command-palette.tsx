@@ -85,9 +85,11 @@ export function CommandPalette({ onToggleTheme }: Readonly<{ onToggleTheme: () =
   function handleInputKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'ArrowDown') {
       event.preventDefault();
+      if (filtered.length === 0) return;
       setActiveIndex((i) => Math.min(i + 1, filtered.length - 1));
     } else if (event.key === 'ArrowUp') {
       event.preventDefault();
+      if (filtered.length === 0) return;
       setActiveIndex((i) => Math.max(i - 1, 0));
     } else if (event.key === 'Enter') {
       event.preventDefault();

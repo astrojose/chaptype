@@ -19,7 +19,7 @@ type HistoryEntry = {
 };
 
 export default function HomeRoute() {
-  const practiceModes = getPracticeModes();
+  const practiceModes = React.useMemo(() => getPracticeModes(), []);
   const [history, setHistory] = React.useState<HistoryEntry[]>([]);
   const navigate = useNavigate();
 
