@@ -118,6 +118,7 @@ const buildGeneratedSession = (mode, entries) => {
     modeId: mode.id,
     text: selectedEntries.map((entry) => entry.text).join(' '),
     entryIds: selectedEntries.map((entry) => entry.id),
+    translations: selectedEntries.map((entry) => entry.meta.translation ?? null),
     meta: {
       category: mode.metadata.category,
       difficulty: mode.metadata.difficulty,
