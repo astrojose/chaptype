@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router';
+import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 export function meta() {
   return [{ title: 'Results · Chaptyp' }];
@@ -6,6 +7,19 @@ export function meta() {
 
 export default function ResultsRoute() {
   const { state } = useLocation();
+  const navigate = useNavigate();
+
+  // Enter key → try again (same mode)
+  React.useEffect(() => {
+    if (!state?.mode) return;
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Enter' && !(event.target instanceof HTMLAnchorElement)) {
+        navigate(`/practice/${(state as { mode: { id: string } }).mode.id}`);
+      }
+    }
+    globalThis.addEventListener('keydown', handleKeyDown);
+    return () => globalThis.removeEventListener('keydown', handleKeyDown);
+  }, [navigate, state]);
 
   if (!state?.result || !state?.mode) {
     return (

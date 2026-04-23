@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import { getPracticeModes } from '../../src/content/practiceContent';
 
@@ -21,6 +21,7 @@ type HistoryEntry = {
 export default function HomeRoute() {
   const practiceModes = getPracticeModes();
   const [history, setHistory] = React.useState<HistoryEntry[]>([]);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     try {
@@ -30,6 +31,20 @@ export default function HomeRoute() {
       // localStorage unavailable — ignore silently
     }
   }, []);
+
+  // Digit keys 1–9 jump directly to that practice mode
+  React.useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.metaKey || event.ctrlKey || event.altKey) return;
+      if ((event.target as HTMLElement).tagName === 'INPUT') return;
+      const index = parseInt(event.key, 10) - 1;
+      if (index >= 0 && index < practiceModes.length) {
+        navigate(`/practice/${practiceModes[index].id}`);
+      }
+    }
+    globalThis.addEventListener('keydown', handleKeyDown);
+    return () => globalThis.removeEventListener('keydown', handleKeyDown);
+  }, [navigate, practiceModes]);
 
   return (
     <section className="page home-page">
@@ -46,7 +61,7 @@ export default function HomeRoute() {
       <div>
         <p className="section-label">Practice modes</p>
         <nav className="mode-list" aria-label="Practice modes">
-          {practiceModes.map((mode) => (
+          {practiceModes.map((mode, i) => (
             <Link key={mode.id} to={`/practice/${mode.id}`} className="mode-item">
               <div className="mode-item-body">
                 <span className="mode-name">{mode.name}</span>
@@ -55,6 +70,7 @@ export default function HomeRoute() {
               <div className="mode-meta">
                 <span className="mode-tag">{mode.metadata.difficulty}</span>
                 <span className="mode-tag">{mode.metadata.language}</span>
+                <span className="kbd-hint mode-shortcut" aria-hidden="true">{i + 1}</span>
                 <span className="mode-cta">Start →</span>
               </div>
             </Link>
